@@ -185,27 +185,28 @@ def get_img_meta_data():
                 # get geo-location metadata
                 if 'GPSInfo' in meta_data:
                     gps_info = meta_data['GPSInfo']
-                    gps_latitude = gps_info[2]
-                    gps_latitude_ref = gps_info[1]
-                    gps_longitude = gps_info[4]
-                    gps_longitude_ref = gps_info[3]
-                    
-                    # convert geo-location data to decimal degrees
-                    latitude = (gps_latitude[0][0] / gps_latitude[0][1] +
-                                gps_latitude[1][0] / gps_latitude[1][1] / 60 +
-                                gps_latitude[2][0] / gps_latitude[2][1] / 3600)
-                    if gps_latitude_ref == 'S':
-                        latitude = -latitude
-                        
-                    longitude = (gps_longitude[0][0] / gps_longitude[0][1] +
-                                 gps_longitude[1][0] / gps_longitude[1][1] / 60 +
-                                 gps_longitude[2][0] / gps_longitude[2][1] / 3600)
-                    if gps_longitude_ref == 'W':
-                        longitude = -longitude
-                        
-                    text_box.insert(tk.END, f"Latitude: {latitude:.6f}, Longitude: {longitude:.6f}\n")
-                else:
-                    text_box.insert(tk.END, "No geo-location metadata found.\n")
+                    gps_latitude = gps_info[2] if 2 in gps_info else None
+                    gps_latitude_ref = gps_info[1] if 1 in gps_info else None
+                    gps_longitude = gps_info[4] if 4 in gps_info else None
+                    gps_longitude_ref = gps_info[3] if 3 in gps_info else None
+
+                    if gps_latitude and gps_latitude_ref and gps_longitude and gps_longitude_ref:
+                        # convert geo-location data to decimal degrees
+                        latitude = (gps_latitude[0][0] / gps_latitude[0][1] +
+                                    gps_latitude[1][0] / gps_latitude[1][1] / 60 +
+                                    gps_latitude[2][0] / gps_latitude[2][1] / 3600)
+                        if gps_latitude_ref == 'S':
+                            latitude = -latitude
+
+                        longitude = (gps_longitude[0][0] / gps_longitude[0][1] +
+                                     gps_longitude[1][0] / gps_longitude[1][1] / 60 +
+                                     gps_longitude[2][0] / gps_longitude[2][1] / 3600)
+                        if gps_longitude_ref == 'W':
+                            longitude = -longitude
+
+                        text_box.insert(tk.END, f"Latitude: {latitude:.6f}, Longitude: {longitude:.6f}\n")
+                    else:
+                        text_box.insert(tk.END, "No geo-location metadata found.\n")
                 
                 # get image size metadata
                 width, height = img.size
