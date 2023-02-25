@@ -2,9 +2,10 @@ import os
 import time
 import tkinter as tk
 import shutil
-from tkinter import filedialog
+from tkinter import Label, filedialog
 import tkinter.simpledialog as sd
-from PIL import Image
+from tkinter.tix import IMAGETEXT
+from PIL import Image, ImageTk
 from PIL.ExifTags import TAGS
 # import requests
 
@@ -220,6 +221,22 @@ def get_img_meta_data():
     except IOError:
         text_box.delete(1.0, tk.END)
         text_box.insert(tk.END, "Invalid image file.\n")
+        
+def display_image():
+    # check if listbox selection is an image file and if so, display the image in the text_box
+    
+    selected_item = listbox.curselection()
+    if selected_item:
+        filename = listbox.get(selected_item[0])
+        if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.gif')):
+            # create PhotoImage object from image file
+            image = Image.open(filename)
+            photo = ImageTk.PhotoImage(image)
+            # set image of text box
+            text_box.image_create('end', image=photo)
+            # store reference to PhotoImage object to prevent garbage collection
+            text_box.image = photo
+    return
 
 def clear_text_box():
     """Clear the text box"""
@@ -281,6 +298,9 @@ button.pack()
 
 get_meta_data_button = tk.Button(root, text="Get Img Meta Data", command=get_img_meta_data)
 get_meta_data_button.pack()
+
+display_image_button = tk.Button(root, text="Display Image", command=display_image)
+display_image_button.pack()
 
 clear_button = tk.Button(root, text="Clear", command=clear_text_box)
 clear_button.pack()
