@@ -216,6 +216,14 @@ def get_img_meta_data():
                 # get image pixel metadata
                 pixels = img.mode
                 text_box.insert(tk.END, f"Image pixels: {pixels}\n")
+                
+                # get date and time metadata
+                if 'DateTimeOriginal' in meta_data:
+                    date_time = meta_data['DateTimeOriginal']
+                    text_box.insert(tk.END, f"Date taken: {date_time[:10]}\n")
+                    text_box.insert(tk.END, f"Time taken: {date_time[11:19]}\n")
+                else:
+                    text_box.insert(tk.END, "No date and time metadata found.\n")
             else:
                 text_box.insert(tk.END, "No metadata found.\n")
     except IOError:
@@ -306,7 +314,15 @@ clear_button = tk.Button(root, text="Clear", command=clear_text_box)
 clear_button.pack()
 
 text_box = tk.Text(root)
-text_box.pack()
+text_box.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+
+scrollbar_y = tk.Scrollbar(text_box, orient=tk.VERTICAL, command=text_box.yview)
+scrollbar_y.pack(side=tk.RIGHT, fill=tk.Y)
+
+scrollbar_x = tk.Scrollbar(text_box, orient=tk.HORIZONTAL, command=text_box.xview)
+scrollbar_x.pack(side=tk.BOTTOM, fill=tk.X)
+
+text_box.config(yscrollcommand=scrollbar_y.set, xscrollcommand=scrollbar_x.set)
 
 show_disk_usage()
 
