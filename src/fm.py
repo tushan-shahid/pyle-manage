@@ -108,7 +108,6 @@ def on_select(evt):
 #     return False
 
 
-
 def show_disk_usage():
     """Show disk usage information for the current directory"""
     path = os.path.abspath(os.getcwd())
@@ -246,6 +245,18 @@ def display_image():
             text_box.image = photo
     return
 
+def search():
+    # ask user for file name to search for
+    search_term = sd.askstring("Search", "Enter file name to search for:")    
+    # with the search term, search the current directory and match the file name with all the files in the directory in the listbox and highlight the matching file name in the listbox
+    if search_term:
+        for i in range(listbox.size()):
+            if search_term in listbox.get(i):
+                listbox.selection_set(i)
+                listbox.activate(i)
+                break
+    return 
+
 def clear_text_box():
     """Clear the text box"""
     text_box.delete("1.0", tk.END)
@@ -309,6 +320,10 @@ get_meta_data_button.pack()
 
 display_image_button = tk.Button(root, text="Display Image", command=display_image)
 display_image_button.pack()
+
+search_button = tk.Button(root, text="Search", command=search)
+search_button.pack()
+
 
 clear_button = tk.Button(root, text="Clear", command=clear_text_box)
 clear_button.pack()
