@@ -11,7 +11,17 @@ from PIL.ExifTags import TAGS
 
 root = tk.Tk()
 root.geometry("800x600")
-root.title("File Manager")
+root.title("Turbo-File-Manager")
+
+# Define colors
+bg_color = "#856ff8"
+button_color = "#4CAF50"
+button_hover_color = "#3e8e41"
+button_text_color = "#ffffff"
+
+root.configure(bg=bg_color)
+
+
 
 def list_dir():
     listbox.delete(0, tk.END)
