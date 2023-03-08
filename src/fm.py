@@ -19,6 +19,8 @@ fg_color = "#ffffff"
 button_color = "#4CAF50"
 button_hover_color = "#3e8e41"
 button_text_color = "#ffffff"
+bg_textbox = "#C1C1FF"
+bg_listbox= "#9B9BCD"
 
 root.configure(bg=bg_color)
 
@@ -279,8 +281,8 @@ label.pack()
 scrollbar = tk.Scrollbar(root)
 scrollbar.pack(side="right", fill="y")
 
-listbox = tk.Listbox(root, yscrollcommand=scrollbar.set)
-listbox.pack(side="left", fill="both", expand=True)
+listbox = tk.Listbox(root,bg=bg_textbox, yscrollcommand=scrollbar.set)
+listbox.pack(side="left", fill="both",expand=True)
 
 total_label = tk.Label(root, font=("Helvetica", 12))
 total_label.pack()
@@ -339,7 +341,7 @@ search_button.pack()
 clear_button = tk.Button(root, text="Clear", command=clear_text_box)
 clear_button.pack()
 
-text_box = tk.Text(root)
+text_box = tk.Text(root,bg=bg_listbox,fg=fg_color)
 text_box.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
 scrollbar_y = tk.Scrollbar(text_box, orient=tk.VERTICAL, command=text_box.yview)
