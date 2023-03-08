@@ -8,21 +8,18 @@ from tkinter.tix import IMAGETEXT
 from PIL import Image, ImageTk
 from PIL.ExifTags import TAGS
 # import requests
+import customtkinter
 
-root = tk.Tk()
+customtkinter.set_appearance_mode("dark")
+
+root = customtkinter.CTk()
 root.geometry("800x600")
 root.title("Turbo-File-Manager")
 
 # Define colors
-bg_color = "#856ff8"
-fg_color = "#ffffff"
-button_color = "#4CAF50"
-button_hover_color = "#3e8e41"
-button_text_color = "#ffffff"
-bg_textbox = "#C1C1FF"
-bg_listbox= "#9B9BCD"
+bg_textbox = "#8B8B8B"
+bg_listbox= "#CDCDC1"
 
-root.configure(bg=bg_color)
 
 
 
@@ -275,7 +272,7 @@ def clear_text_box():
     text_box.delete("1.0", tk.END)
 
 
-label = tk.Label(root, text="Turbo-File-Manager", font=("Helvetica", 16), bg=bg_color, fg=fg_color)
+label = customtkinter.CTkLabel(root, text="Turbo-File-Manager", font=("Helvetica", 16))
 label.pack()
 
 scrollbar = tk.Scrollbar(root)
@@ -284,64 +281,64 @@ scrollbar.pack(side="right", fill="y")
 listbox = tk.Listbox(root,bg=bg_textbox, yscrollcommand=scrollbar.set)
 listbox.pack(side="left", fill="both",expand=True)
 
-total_label = tk.Label(root, font=("Helvetica", 12))
+total_label = customtkinter.CTkLabel(root, font=("Helvetica", 12))
 total_label.pack()
 
-used_label = tk.Label(root, font=("Helvetica", 12))
+used_label = customtkinter.CTkLabel(root, font=("Helvetica", 12))
 used_label.pack()
 
-free_label = tk.Label(root, font=("Helvetica", 12))
+free_label = customtkinter.CTkLabel(root, font=("Helvetica", 12))
 free_label.pack()
 
 scrollbar.config(command=listbox.yview)
 
-up_button = tk.Button(root, text="Up", command=go_up)
+up_button = customtkinter.CTkButton(root, text="Up", command=go_up)
 up_button.pack()
 
-entry = tk.Entry(root, width=50)
+entry = customtkinter.CTkEntry(root, width=200)
 entry.pack()
 
-go_button = tk.Button(root, text="Go", command=go_to_dir)
+go_button = customtkinter.CTkButton(root, text="Go", command=go_to_dir)
 go_button.pack()
 
-create_button = tk.Button(root, text="Create File", command=create_file)
+create_button = customtkinter.CTkButton(root, text="Create File", command=create_file)
 create_button.pack()
 
-delete_button = tk.Button(root, text="Delete File", command=delete_file)
+delete_button = customtkinter.CTkButton(root, text="Delete File", command=delete_file)
 delete_button.pack()
 
-rename_file_button = tk.Button(root, text="Rename File", command=rename_file)
+rename_file_button = customtkinter.CTkButton(root, text="Rename File", command=rename_file)
 rename_file_button.pack()
 
-create_folder_button = tk.Button(root, text="Create Folder", command=create_folder)
+create_folder_button = customtkinter.CTkButton(root, text="Create Folder", command=create_folder)
 create_folder_button.pack()
 
-delete_folder_button = tk.Button(root, text="Delete Folder", command=delete_folder)
+delete_folder_button = customtkinter.CTkButton(root, text="Delete Folder", command=delete_folder)
 delete_folder_button.pack()
 
-rename_folder_button = tk.Button(root, text="Rename Folder", command=rename_folder)
+rename_folder_button = customtkinter.CTkButton(root, text="Rename Folder", command=rename_folder)
 rename_folder_button.pack()
 
-dir_tree_button = tk.Button(root, text="Show Directory Structure", command=show_directory_structure)
+dir_tree_button = customtkinter.CTkButton(root, text="Show Directory Structure", command=show_directory_structure)
 dir_tree_button.pack()
 
-button = tk.Button(root, text='Show file contents in bytes', command=show_bytes)
+button = customtkinter.CTkButton(root, text='Show file contents in bytes', command=show_bytes)
 button.pack()
 
-get_meta_data_button = tk.Button(root, text="Get Img Meta Data", command=get_img_meta_data)
+get_meta_data_button = customtkinter.CTkButton(root, text="Get Img Meta Data", command=get_img_meta_data)
 get_meta_data_button.pack()
 
-display_image_button = tk.Button(root, text="Display Image", command=display_image)
+display_image_button = customtkinter.CTkButton(root, text="Display Image", command=display_image)
 display_image_button.pack()
 
-search_button = tk.Button(root, text="Search", command=search)
+search_button = customtkinter.CTkButton(root, text="Search", command=search)
 search_button.pack()
 
 
-clear_button = tk.Button(root, text="Clear", command=clear_text_box)
+clear_button = customtkinter.CTkButton(root, text="Clear", command=clear_text_box)
 clear_button.pack()
 
-text_box = tk.Text(root,bg=bg_listbox,fg=fg_color)
+text_box = tk.Text(root,bg=bg_listbox)
 text_box.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
 scrollbar_y = tk.Scrollbar(text_box, orient=tk.VERTICAL, command=text_box.yview)
@@ -357,7 +354,7 @@ show_disk_usage()
 list_dir()
 
 listbox.bind('<<ListboxSelect>>', on_select)
-tooltip = tk.Label(root, anchor='w', justify='left', bd=1, relief='solid')
+tooltip = customtkinter.CTkLabel(root, anchor='w', justify='left')
 tooltip.bind('<Enter>', lambda e: tooltip.place_forget())
 
 root.mainloop()
