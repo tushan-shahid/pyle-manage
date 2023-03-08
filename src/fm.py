@@ -15,6 +15,7 @@ root.title("Turbo-File-Manager")
 
 # Define colors
 bg_color = "#856ff8"
+fg_color = "#ffffff"
 button_color = "#4CAF50"
 button_hover_color = "#3e8e41"
 button_text_color = "#ffffff"
@@ -272,7 +273,7 @@ def clear_text_box():
     text_box.delete("1.0", tk.END)
 
 
-label = tk.Label(root, text="File Manager", font=("Helvetica", 16))
+label = tk.Label(root, text="Turbo-File-Manager", font=("Helvetica", 16), bg=bg_color, fg=fg_color)
 label.pack()
 
 scrollbar = tk.Scrollbar(root)
