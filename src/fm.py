@@ -3,9 +3,7 @@ import os
 import time
 import tkinter as tk
 import shutil
-from tkinter import Label, filedialog
 import tkinter.simpledialog as sd
-from tkinter.tix import IMAGETEXT
 from PIL import Image, ImageTk
 from PIL.ExifTags import TAGS
 import customtkinter
