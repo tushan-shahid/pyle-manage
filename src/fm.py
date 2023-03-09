@@ -88,8 +88,7 @@ def on_select(evt):
     filetype = os.path.splitext(filename)[1]
     filesize = os.path.getsize(filepath)
     is_malicious = check_for_malware(filepath)
-    tooltip.configure(text=f"Created: {created}\nType: {filetype}\nSize: {filesize}")
-    #  bytes\nMalicious: {is_malicious}
+    tooltip.configure(text=f"Created: {created}\nType: {filetype}\nSize: {filesize} bytes\nMalicious: {is_malicious}")
     tooltip.place(x=0, y=0, relx=1.0, rely=1.0, anchor='se')
     
     # close tooltip if mouse leaves the listbox
