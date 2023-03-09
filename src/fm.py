@@ -1,3 +1,4 @@
+import hashlib
 import os
 import time
 import tkinter as tk
@@ -80,14 +81,13 @@ def rename_folder():
 def on_select(evt):
     """Display tooltip with file information"""
     w = evt.widget
-    # api_key="YOUR_API_KEY"
     index = int(w.curselection()[0])
     filename = w.get(index)
     filepath = os.path.join(os.getcwd(), filename)
     created = time.ctime(os.path.getctime(filepath))
     filetype = os.path.splitext(filename)[1]
     filesize = os.path.getsize(filepath)
-    # is_malicious = check_for_malware(filepath, api_key)
+    is_malicious = check_for_malware(filepath)
     tooltip.configure(text=f"Created: {created}\nType: {filetype}\nSize: {filesize}")
     #  bytes\nMalicious: {is_malicious}
     tooltip.place(x=0, y=0, relx=1.0, rely=1.0, anchor='se')
@@ -98,21 +98,22 @@ def on_select(evt):
 
 
 
-# def check_for_malware(filepath, api_key):
-#     url = 'https://www.virustotal.com/vtapi/v2/file/scan'
-#     files = {'file': (filepath, open(filepath, 'rb'))}
-#     params = {'apikey': api_key}
-#     response = requests.post(url, files=files, params=params)
-#     json_response = response.json()
-#     resource = json_response['resource']
-#     url = 'https://www.virustotal.com/vtapi/v2/file/report'
-#     params = {'apikey': api_key, 'resource': resource}
-#     response = requests.get(url, params=params)
-#     json_response = response.json()
-#     if json_response['response_code'] == 1:
-#         if json_response['positives'] > 0:
-#             return True
-#     return False
+def check_for_malware(file_name):
+    malicious_hashes = ['hash1', 'hash2', 'hash3', 'hash4', 'hash5', 'hash6', 'hash7', 'hash8', 'hash9', 'hash10']
+    block_size = 65536
+    with open(file_name, 'rb') as f:
+        hasher = hashlib.md5()
+        while True:
+            data = f.read(block_size)
+            if not data:
+                break
+            hasher.update(data)
+    file_hash = hasher.hexdigest()
+    if file_hash in malicious_hashes:
+        return True
+    else:
+        return False
+
 
 
 def show_disk_usage():
