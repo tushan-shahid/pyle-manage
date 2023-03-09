@@ -7,6 +7,7 @@ Pyle-Manager is a simple file manager application built using Python and the Tki
 - Clone the repository or download the zip file.
 - Navigate to the directory where the repository was cloned or the zip file was extracted.
 - Install the required dependencies by running the command `pip install -r requirements.txt`.
+- Run the command `python extract_hash.py` to extract the malicious hash list from VirusShare.
 - Run the command `python pyle_manager.py`.
 
 ## Usage

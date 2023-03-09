@@ -85,8 +85,7 @@ def on_select(evt):
     created = time.ctime(os.path.getctime(filepath))
     filetype = os.path.splitext(filename)[1]
     filesize = os.path.getsize(filepath)
-    is_malicious = check_for_malware(filepath)
-    tooltip.configure(text=f"Created: {created}\nType: {filetype}\nSize: {filesize} bytes\nMalicious: {is_malicious}")
+    tooltip.configure(text=f"Created: {created}\nType: {filetype}\nSize: {filesize}")
     tooltip.place(x=0, y=0, relx=1.0, rely=1.0, anchor='se')
     
     # close tooltip if mouse leaves the listbox
@@ -95,21 +94,40 @@ def on_select(evt):
 
 
 
-def check_for_malware(file_name):
-    malicious_hashes = ['hash1', 'hash2', 'hash3', 'hash4', 'hash5', 'hash6', 'hash7', 'hash8', 'hash9', 'hash10']
-    block_size = 65536
-    with open(file_name, 'rb') as f:
-        hasher = hashlib.md5()
-        while True:
-            data = f.read(block_size)
-            if not data:
-                break
-            hasher.update(data)
-    file_hash = hasher.hexdigest()
-    if file_hash in malicious_hashes:
-        return True
+def check_for_malware(file_path):
+    if os.path.isfile(file_path):
+        malicious_hashes = set()
+        with open('virushashes.txt', 'r') as f:
+            for line in f:
+                hash_value = line.strip()
+                if hash_value:
+                    malicious_hashes.add(hash_value)
+
+        block_size = 65536
+        with open(file_path, 'rb') as f:
+            hasher = hashlib.md5()
+            while True:
+                data = f.read(block_size)
+                if not data:
+                    break
+                hasher.update(data)
+        file_hash = hasher.hexdigest()
+        if file_hash in malicious_hashes:
+            return True
+        else:
+            return False
     else:
+        # If it's a folder, return False
         return False
+
+def show_malware():
+    file = listbox.get(listbox.curselection())
+    text_box.delete("1.0", tk.END)
+    if check_for_malware(file):
+        text_box.insert(tk.END, f"{file} is infected with malware!")
+    else:
+        text_box.insert(tk.END, f"{file} is not infected with malware.")
+
 
 
 
@@ -347,6 +365,9 @@ dir_tree_button.pack(padx=5, pady=5)
 image_buttons = customtkinter.CTkFrame(root)
 image_buttons.pack(pady=5)
 
+extra_buttons = customtkinter.CTkFrame(root)
+extra_buttons.pack(pady=5)
+
 image_buttons_label = customtkinter.CTkLabel(image_buttons, text="Image File Operations")
 image_buttons_label.pack()
 
@@ -355,6 +376,9 @@ get_meta_data_button.pack(side="left",padx=5, pady=5)
 
 display_image_button = customtkinter.CTkButton(image_buttons, text="Display Image", command=display_image)
 display_image_button.pack(padx=5, pady=5)
+
+show_malware_button = customtkinter.CTkButton(extra_buttons, text="Check for Malware", command=show_malware)
+show_malware_button.pack(padx=5, pady=5)
 
 clear_button = customtkinter.CTkButton(root, text="Clear ViewBox", command=clear_text_box)
 clear_button.pack(side="bottom",padx=5, pady=5)
