@@ -1,6 +1,6 @@
 # Pyle-Manage
 
-Pyle-Manager is a simple file manager application built using Python and the Tkinter library for the UI. It allows users to perform basic file operations such as creating, renaming, and deleting files and folders, as well as viewing file information.
+Pyle-Manage is a simple file manager application built using Python and the Tkinter library for the UI. It allows users to perform basic file operations such as creating, renaming, and deleting files and folders, as well as viewing file information.
 
 ## Installation
 

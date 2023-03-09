@@ -12,7 +12,7 @@ customtkinter.set_appearance_mode("dark")
 
 root = customtkinter.CTk()
 root.geometry("1024x900")
-root.title("Pyle-Manager")
+root.title("Pyle-Manage")
 
 # colors
 bg_textbox = "#8B8B8B"
@@ -285,7 +285,7 @@ def clear_text_box():
     text_box.delete("1.0", tk.END)
 
 
-label = customtkinter.CTkLabel(root, text="Pyle-Manager", font=("Helvetica", 22))
+label = customtkinter.CTkLabel(root, text="Pyle-Manage", font=("Helvetica", 22))
 label.pack()
 
 scrollbar = tk.Scrollbar(root)
