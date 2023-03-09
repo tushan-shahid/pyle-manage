@@ -329,13 +329,13 @@ folder_buttons = customtkinter.CTkFrame(root)
 folder_buttons.pack(pady=5)
 
 create_folder_button = customtkinter.CTkButton(folder_buttons, text="Create Folder", command=create_folder)
-create_folder_button.pack()
+create_folder_button.pack(side="left")
 
 delete_folder_button = customtkinter.CTkButton(folder_buttons, text="Delete Folder", command=delete_folder)
-delete_folder_button.pack()
+delete_folder_button.pack(side="left")
 
 rename_folder_button = customtkinter.CTkButton(folder_buttons, text="Rename Folder", command=rename_folder)
-rename_folder_button.pack()
+rename_folder_button.pack(side="left")
 
 dir_tree_button = customtkinter.CTkButton(folder_buttons, text="Show Directory Structure", command=show_directory_structure)
 dir_tree_button.pack()
@@ -344,12 +344,12 @@ extra_buttons = customtkinter.CTkFrame(root)
 extra_buttons.pack(pady=5)
 
 get_meta_data_button = customtkinter.CTkButton(extra_buttons, text="Get Img Meta Data", command=get_img_meta_data)
-get_meta_data_button.pack()
+get_meta_data_button.pack(side="left")
 
 display_image_button = customtkinter.CTkButton(extra_buttons, text="Display Image", command=display_image)
 display_image_button.pack()
 
-clear_button = customtkinter.CTkButton(root, text="Clear", command=clear_text_box)
+clear_button = customtkinter.CTkButton(root, text="Clear ViewBox", command=clear_text_box)
 clear_button.pack()
 
 text_box = tk.Text(root,bg=bg_listbox)
