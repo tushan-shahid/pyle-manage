@@ -7,20 +7,17 @@ import tkinter.simpledialog as sd
 from tkinter.tix import IMAGETEXT
 from PIL import Image, ImageTk
 from PIL.ExifTags import TAGS
-# import requests
 import customtkinter
 
 customtkinter.set_appearance_mode("dark")
 
 root = customtkinter.CTk()
-root.geometry("800x600")
+root.geometry("1024x900")
 root.title("Pyle-Manager")
 
-# Define colors
+# colors
 bg_textbox = "#8B8B8B"
 bg_listbox= "#CDCDC1"
-
-
 
 
 def list_dir():
@@ -272,7 +269,7 @@ def clear_text_box():
     text_box.delete("1.0", tk.END)
 
 
-label = customtkinter.CTkLabel(root, text="Turbo-File-Manager", font=("Helvetica", 16))
+label = customtkinter.CTkLabel(root, text="Pyle-Manager", font=("Helvetica", 22))
 label.pack()
 
 scrollbar = tk.Scrollbar(root)
@@ -298,11 +295,11 @@ direction_buttons.pack(pady=5)
 direction_buttons_label = customtkinter.CTkLabel(direction_buttons, text="Directory Traversal")
 direction_buttons_label.pack()
 
-up_button = customtkinter.CTkButton(direction_buttons, text="Previous Directory", command=go_up)
-up_button.pack()
-
 entry = customtkinter.CTkEntry(direction_buttons, width=200)
-entry.pack(side="left" ,padx=5, pady=5)
+entry.pack(padx=5, pady=5)
+
+up_button = customtkinter.CTkButton(direction_buttons, text="Previous Directory", command=go_up)
+up_button.pack(side="left",padx=5, pady=5)
 
 go_button = customtkinter.CTkButton(direction_buttons, text="Go to Directory", command=go_to_dir)
 go_button.pack(side="right",padx=5, pady=5)
