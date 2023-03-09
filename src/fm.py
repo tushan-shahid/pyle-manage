@@ -14,7 +14,7 @@ customtkinter.set_appearance_mode("dark")
 
 root = customtkinter.CTk()
 root.geometry("800x600")
-root.title("Turbo-File-Manager")
+root.title("Pyle-Manager")
 
 # Define colors
 bg_textbox = "#8B8B8B"
@@ -295,14 +295,17 @@ scrollbar.config(command=listbox.yview)
 direction_buttons = customtkinter.CTkFrame(root)
 direction_buttons.pack(pady=5)
 
-up_button = customtkinter.CTkButton(direction_buttons, text="Up", command=go_up)
+direction_buttons_label = customtkinter.CTkLabel(direction_buttons, text="Directory Traversal")
+direction_buttons_label.pack()
+
+up_button = customtkinter.CTkButton(direction_buttons, text="Previous Directory", command=go_up)
 up_button.pack()
 
 entry = customtkinter.CTkEntry(direction_buttons, width=200)
-entry.pack()
+entry.pack(side="left" ,padx=5, pady=5)
 
-go_button = customtkinter.CTkButton(direction_buttons, text="Go", command=go_to_dir)
-go_button.pack()
+go_button = customtkinter.CTkButton(direction_buttons, text="Go to Directory", command=go_to_dir)
+go_button.pack(side="right",padx=5, pady=5)
 
 file_buttons = customtkinter.CTkFrame(root)
 file_buttons.pack(pady=5)
@@ -310,47 +313,56 @@ file_buttons.pack(pady=5)
 file_buttons2 = customtkinter.CTkFrame(root)
 file_buttons2.pack(pady=5)
 
+file_button_label = customtkinter.CTkLabel(file_buttons, text="File Operations")
+file_button_label.pack()
+
 create_button = customtkinter.CTkButton(file_buttons, text="Create File", command=create_file)
-create_button.pack(side="left")
+create_button.pack(side="left",padx=5, pady=5)
 
 delete_button = customtkinter.CTkButton(file_buttons, text="Delete File", command=delete_file)
-delete_button.pack(side="left")
+delete_button.pack(side="left",padx=5, pady=5)
 
 rename_file_button = customtkinter.CTkButton(file_buttons, text="Rename File", command=rename_file)
-rename_file_button.pack()
+rename_file_button.pack(padx=5, pady=5)
 
 search_button = customtkinter.CTkButton(file_buttons2, text="Search File", command=search)
-search_button.pack(side="left")
+search_button.pack(side="left",padx=5, pady=5)
 
 show_content_button = customtkinter.CTkButton(file_buttons2, text='Show file contents in bytes', command=show_bytes)
-show_content_button.pack()
+show_content_button.pack(padx=5, pady=5)
 
 folder_buttons = customtkinter.CTkFrame(root)
 folder_buttons.pack(pady=5)
 
+folder_button_label = customtkinter.CTkLabel(folder_buttons, text="Folder Operations")
+folder_button_label.pack()
+
 create_folder_button = customtkinter.CTkButton(folder_buttons, text="Create Folder", command=create_folder)
-create_folder_button.pack(side="left")
+create_folder_button.pack(side="left",padx=5, pady=5)
 
 delete_folder_button = customtkinter.CTkButton(folder_buttons, text="Delete Folder", command=delete_folder)
-delete_folder_button.pack(side="left")
+delete_folder_button.pack(side="left",padx=5, pady=5)
 
 rename_folder_button = customtkinter.CTkButton(folder_buttons, text="Rename Folder", command=rename_folder)
-rename_folder_button.pack(side="left")
+rename_folder_button.pack(side="left",padx=5, pady=5)
 
 dir_tree_button = customtkinter.CTkButton(folder_buttons, text="Show Directory Structure", command=show_directory_structure)
-dir_tree_button.pack()
+dir_tree_button.pack(padx=5, pady=5)
 
-extra_buttons = customtkinter.CTkFrame(root)
-extra_buttons.pack(pady=5)
+image_buttons = customtkinter.CTkFrame(root)
+image_buttons.pack(pady=5)
 
-get_meta_data_button = customtkinter.CTkButton(extra_buttons, text="Get Img Meta Data", command=get_img_meta_data)
-get_meta_data_button.pack(side="left")
+image_buttons_label = customtkinter.CTkLabel(image_buttons, text="Image File Operations")
+image_buttons_label.pack()
 
-display_image_button = customtkinter.CTkButton(extra_buttons, text="Display Image", command=display_image)
-display_image_button.pack()
+get_meta_data_button = customtkinter.CTkButton(image_buttons, text="Get Img Meta Data", command=get_img_meta_data)
+get_meta_data_button.pack(side="left",padx=5, pady=5)
+
+display_image_button = customtkinter.CTkButton(image_buttons, text="Display Image", command=display_image)
+display_image_button.pack(padx=5, pady=5)
 
 clear_button = customtkinter.CTkButton(root, text="Clear ViewBox", command=clear_text_box)
-clear_button.pack()
+clear_button.pack(side="bottom",padx=5, pady=5)
 
 text_box = tk.Text(root,bg=bg_listbox)
 text_box.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
